@@ -3,7 +3,6 @@ import 'package:flutter_crud/models/user.dart';
 import 'package:flutter_crud/provider/users.dart';
 import 'package:provider/provider.dart';
 
-
 class UserForm extends StatefulWidget {
   const UserForm({Key? key}) : super(key: key);
 
@@ -26,14 +25,14 @@ class _UserFormState extends State<UserForm> {
 
   void _loadFormData(User user) {
     // ignore: unnecessary_null_comparison
-    if(user != null) {
-    _formData['id'] = user.id;
-    _formData['name'] = user.name;
-    _formData['telefone'] = user.telefone;
-    _formData['email'] = user.email;
-    _formData['empresa'] = user.empresa;
-    _formData['observacoes'] = user.observacoes;
-    _formData['avatarUrl'] = user.avatarUrl;
+    if (user != null) {
+      _formData['id'] = user.id;
+      _formData['name'] = user.name;
+      _formData['telefone'] = user.telefone;
+      _formData['email'] = user.email;
+      _formData['empresa'] = user.empresa;
+      _formData['observacoes'] = user.observacoes;
+      _formData['avatarUrl'] = user.avatarUrl;
     }
   }
 
@@ -41,9 +40,10 @@ class _UserFormState extends State<UserForm> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final user = ModalRoute.of(context)!.settings.arguments as User;
-    _loadFormData(user);
-
+    final user = ModalRoute.of(context)?.settings.arguments;
+    if (user != null) {
+      _loadFormData(user as User);
+    }
   }
 
   @override
@@ -149,7 +149,7 @@ class _UserFormState extends State<UserForm> {
               TextFormField(
                 initialValue: _formData['observacoes'],
                 // ignore: prefer_const_constructors
-                decoration: InputDecoration(labelText: 'Obeservações'),
+                decoration: InputDecoration(labelText: 'Observações'),
                 onSaved: (value) => _formData['observacoes'] = value!,
 
                 validator: (value) {
